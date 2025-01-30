@@ -14,8 +14,9 @@ type Config struct {
 }
 
 type DBPostgres struct {
-	DSN            string `yaml:"dsn"`
-	MigrationsPath string `yaml:"migrations_path"`
+	DSN             string `yaml:"dsn"`
+	MigrationsPath  string `yaml:"migrations_path"`
+	MigrationsTable string `yaml:"migrations_table"`
 }
 
 // #Must приставка ставится тогда, когда функция вместо возврата ошибки будет паниковать

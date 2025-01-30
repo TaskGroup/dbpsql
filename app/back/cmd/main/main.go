@@ -21,7 +21,7 @@ func main() {
 	cfg := config.MustLoad()
 	var err error
 
-	if err = goose.InitMigrations(cfg.DBPostgres.DSN, cfg.DBPostgres.MigrationsPath); err != nil {
+	if err = goose.InitMigrations(cfg.DBPostgres.DSN, cfg.DBPostgres.MigrationsPath, cfg.MigrationsTable); err != nil {
 		panic(errors.New("init migrations failed: " + err.Error()))
 	}
 	DB, err := postgres.InitDB(cfg.DBPostgres.DSN)

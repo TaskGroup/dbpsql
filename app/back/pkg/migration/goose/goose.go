@@ -6,7 +6,8 @@ import (
 	"github.com/pressly/goose/v3"
 )
 
-func InitMigrations(dsn, dirPath string) error {
+func InitMigrations(dsn, dirPath, tableName string) error {
+	goose.SetTableName(tableName)
 	db, err := sql.Open("postgres", dsn)
 
 	if err != nil {
