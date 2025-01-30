@@ -1,0 +1,9 @@
+.idea
+.vscode
+.env
+app/back/var
+app/back/vendor
+app/back/.env.local
+app/back/config/jwt/*.pem
+app/back/config/local.yaml
+app/back/main

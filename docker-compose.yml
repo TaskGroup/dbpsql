@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+    dbpsql:
+        build:
+            context: .
+            dockerfile: docker-local/back/Dockerfile
+        working_dir: /var/www/html/app/back
+        volumes:
+            - ./app/back:/var/www/html/app/back
+            - ./docker-local/back/back.sh:/back.sh
+        networks:
+            back_db:
+        container_name: dbpsql
+        image: golang:1.21
+        entrypoint: /back.sh
+        environment:
+            - TZ=Europe/Moscow
+        deploy:
+            resources:
+                limits:
+                    cpus: '0.50'
+                    memory: '256M'
+                reservations:
+                    cpus: '0.25'
+                    memory: '128M'
+
+    db:
+        container_name: db
+        image: postgres:15.3-alpine
+        environment:
+            - POSTGRES_DB=dbname
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=
+            - POSTGRES_HOST_AUTH_METHOD=trust
+        ports:
+            - "${DB_PORT}:5432"
+        volumes:
+            - db:/var/lib/postgresql/data
+        networks:
+            back_db:
+        deploy:
+            resources:
+                limits:
+                    cpus: '0.50'
+                    memory: '512M'
+                reservations:
+                    cpus: '0.25'
+                    memory: '128M'
+
+volumes:
+    db:
+
+networks:
+    back_db:

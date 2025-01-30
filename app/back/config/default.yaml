@@ -1,0 +1,3 @@
+db_postgres:
+  dsn: "postgresql://root@db:5432/dbname?sslmode=disable"
+  migrations_path: "/var/www/html/app/back/internal/storage/migrations"
